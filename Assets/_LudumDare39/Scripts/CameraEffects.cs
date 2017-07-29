@@ -46,11 +46,11 @@ public class CameraEffects : MonoBehaviour
 				//float newStrenght =  health / shakingToHealthRatio;
 				//tweenShaking.strength = new Vector3( newStrenght, newStrenght );
 				tweenShaking.strength = new Vector3( 0.1f, .1f );
-				tweenShaking.Play();
+				//tweenShaking.Play();
 			}
 			else
 			{
-				tweenShaking.Stop();
+				//tweenShaking.Stop();
 			}
 
 			// The camera getting farther the lowest the health is
@@ -66,6 +66,12 @@ public class CameraEffects : MonoBehaviour
 	public void Play()
 	{
 		tweenRotationConstant1.Play();
-		tweenShaking.Play();
+		//tweenShaking.Play();
+	}
+
+	public void Reset()
+	{
+		tweenRotationConstant1.Stop();
+		//tweenShaking.Stop();
 	}
 }

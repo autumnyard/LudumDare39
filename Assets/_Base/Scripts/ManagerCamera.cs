@@ -5,12 +5,18 @@ public class ManagerCamera : MonoBehaviour
 {
     #region Variables
     public CameraHelper[] cameras;
-    #endregion
 
 
-    #region Monobehaviour
 
-    void Awake()
+	// LDJAM39
+	//[SerializeField] private CameraEffects cameraEffects;
+	public CameraEffects cameraEffects;
+	#endregion
+
+
+	#region Monobehaviour
+
+	void Awake()
     {
         Director.Instance.managerCamera = this;
     }

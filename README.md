@@ -20,12 +20,14 @@ You can download it from: Not yet.
 ## GDD
 
 ### Description ###
+
+#### Base
 - Top down, free real time movement.
 - To finish a level you must take all the stars and then go to the end.
 
-** Health **
+#### Health
 - Health can be up to a maximum, never surpassing it.
-  - Currently 20, but may change on a level basis.
+  - Currently 10, but may change on a level basis.
   
 - Each movement you make, you lose health.
   - At first I made that you lose health with time.
@@ -33,8 +35,9 @@ You can download it from: Not yet.
   - Option A: Only when an input is pressed.
   - Option B: When you're moving for any reason: passive force or momentum.
   - I guess I'll be going for A.
+  - Multiplier is 1.5 * time delta
 
-** Capsules **
+#### Capsules **
 - There are capsules all over the map to recover health.
 
 

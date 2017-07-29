@@ -19,12 +19,14 @@ public class Director : MonoBehaviour
 	public ManagerAudio managerAudio;
 
 
+
+
 	public Structs.GameMode currentGameMode { private set; get; }
 	public Structs.GameDifficulty currentGameDifficulty { private set; get; }
 	public Structs.GameView currentGameView { private set; get; }
 	public Structs.GameScene currentScene;
 
-	private int maxLevelNumber = 2;
+	private int maxLevelNumber = 3;
 	public int currentLevel = 0;
 
 	public bool isPaused;
@@ -280,14 +282,18 @@ public class Director : MonoBehaviour
 		gameRunning = to;
 		healthDecreaseCounter = healthDecreaseTime;
 		gameManager.ResetHealth();
+		// TODO: Camera effects turn off and on!!
+
 
 		if( to )
 		{
+		managerCamera.cameraEffects.Play();
 			gameManager.OnPlayerDeath += GameEnd;
 			//gameManager.OnNoStars += GameEnd;
 		}
 		else
 		{
+		managerCamera.cameraEffects.Reset();
 			if( gameManager.OnPlayerDeath != null )
 			{
 				gameManager.OnPlayerDeath -= GameEnd;
@@ -399,12 +405,6 @@ public class Director : MonoBehaviour
 
 		// Also reset healthDecreaser counter to 1 second
 		healthDecreaseCounter = healthDecreaseTime;
-	}
-
-	public void DebugHealthDecrease( float howMuch = 0.1f )
-	{
-		gameManager.HealthDecreaseFloat( howMuch );
-		managerUI.SetHealth( gameManager.health );
 	}
 
 	public void DebugStarTaken()

@@ -107,19 +107,8 @@ public class ManagerInput : MonoBehaviour
 			CallDelegate( OnKeyboard[(int)MyKeyboard.E], Input.GetKey( KeyCode.E ) );
 
 
-			// Special keys
-			CallDelegate( OnKeyboard[(int)MyKeyboard.Space], Input.GetKeyDown( KeyCode.Space ) );
-			CallDelegate( OnKeyboard[(int)MyKeyboard.Enter], Input.GetKeyDown( KeyCode.Return ) );
-			CallDelegate( OnKeyboard[(int)MyKeyboard.Enter], Input.GetKeyDown( KeyCode.KeypadEnter ) );
-			CallDelegate( OnKeyboard[(int)MyKeyboard.Escape], Input.GetKeyDown( KeyCode.Escape ) );
-			CallDelegate( OnKeyboard[(int)MyKeyboard.ShiftLeft], Input.GetKey( KeyCode.LeftShift ) );
-			CallDelegate( OnKeyboard[(int)MyKeyboard.ControlLeft], Input.GetKey( KeyCode.LeftControl ) );
-			CallDelegate( OnKeyboard[(int)MyKeyboard.ShiftRight], Input.GetKeyDown( KeyCode.RightShift ) );
-			CallDelegate( OnKeyboard[(int)MyKeyboard.ControlRight], Input.GetKeyDown( KeyCode.RightControl ) );
 
 			// Numbers
-			CallDelegate( OnKeyboard[(int)MyKeyboard.Key0], Input.GetKeyDown( KeyCode.Alpha0 ) );
-			CallDelegate( OnKeyboard[(int)MyKeyboard.Key0], Input.GetKeyDown( KeyCode.Keypad0 ) );
 			CallDelegate( OnKeyboard[(int)MyKeyboard.Key1], Input.GetKeyDown( KeyCode.Alpha1 ) );
 			CallDelegate( OnKeyboard[(int)MyKeyboard.Key1], Input.GetKeyDown( KeyCode.Keypad1 ) );
 			CallDelegate( OnKeyboard[(int)MyKeyboard.Key2], Input.GetKeyDown( KeyCode.Alpha2 ) );
@@ -149,6 +138,13 @@ public class ManagerInput : MonoBehaviour
 
 
 			// LDJAM39 thingies
+			// Special keys
+			CallDelegate( OnKeyboard[(int)MyKeyboard.Space], Input.GetKeyDown( KeyCode.Space ) );
+			CallDelegate( OnKeyboard[(int)MyKeyboard.Enter], Input.GetKeyDown( KeyCode.Return ) );
+			CallDelegate( OnKeyboard[(int)MyKeyboard.Enter], Input.GetKeyDown( KeyCode.KeypadEnter ) );
+			CallDelegate( OnKeyboard[(int)MyKeyboard.Escape], Input.GetKeyDown( KeyCode.Escape ) );
+
+
 			if( Director.Instance.currentScene == Structs.GameScene.Ingame )
 			{
 				// Arrows
@@ -162,6 +158,14 @@ public class ManagerInput : MonoBehaviour
 				CallDelegate( OnKeyboard[(int)MyKeyboard.A], Input.GetKey( KeyCode.A ) );
 				CallDelegate( OnKeyboard[(int)MyKeyboard.S], Input.GetKey( KeyCode.S ) );
 				CallDelegate( OnKeyboard[(int)MyKeyboard.D], Input.GetKey( KeyCode.D ) );
+
+				// Dash
+				CallDelegate( OnKeyboard[(int)MyKeyboard.ShiftLeft], Input.GetKey( KeyCode.LeftShift ) );
+				CallDelegate( OnKeyboard[(int)MyKeyboard.ControlLeft], Input.GetKey( KeyCode.LeftControl ) );
+				CallDelegate( OnKeyboard[(int)MyKeyboard.ShiftRight], Input.GetKeyDown( KeyCode.RightShift ) );
+				CallDelegate( OnKeyboard[(int)MyKeyboard.ControlRight], Input.GetKeyDown( KeyCode.RightControl ) );
+				CallDelegate( OnKeyboard[(int)MyKeyboard.Key0], Input.GetKeyDown( KeyCode.Alpha0 ) );
+				CallDelegate( OnKeyboard[(int)MyKeyboard.Key0], Input.GetKeyDown( KeyCode.Keypad0 ) );
 
 				// LDJAM39: Is a player being moved?
 				if(
@@ -254,6 +258,12 @@ public class ManagerInput : MonoBehaviour
 				Bind( ref OnKeyboard[(int)MyKeyboard.S], Director.Instance.managerEntity.playersScript[0].MoveDown );
 				Bind( ref OnKeyboard[(int)MyKeyboard.A], Director.Instance.managerEntity.playersScript[0].MoveLeft );
 				Bind( ref OnKeyboard[(int)MyKeyboard.D], Director.Instance.managerEntity.playersScript[0].MoveRight );
+				Bind( ref OnKeyboard[(int)MyKeyboard.Key0], Director.Instance.managerEntity.playersScript[0].Dash );
+				Bind( ref OnKeyboard[(int)MyKeyboard.ControlLeft], Director.Instance.managerEntity.playersScript[0].Dash );
+				Bind( ref OnKeyboard[(int)MyKeyboard.ShiftLeft], Director.Instance.managerEntity.playersScript[0].Dash );
+				Bind( ref OnKeyboard[(int)MyKeyboard.ControlRight], Director.Instance.managerEntity.playersScript[0].Dash );
+				Bind( ref OnKeyboard[(int)MyKeyboard.ShiftRight], Director.Instance.managerEntity.playersScript[0].Dash );
+
 				//Bind(ref OnKeyboard[(int)MyKeyboard.Space], Director.Instance.PlayerJump);
 				//Bind(ref OnKeyboard[(int)MyKeyboard.Enter], Director.Instance.GenerateEnemy);
 				//Bind(ref OnKeyboard[(int)MyKeyboard.ArrowLeft], Director.Instance.MapPrevious);

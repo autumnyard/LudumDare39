@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
 	#region Variables
 	public const float maxHealth = 10f;
+	private const float healthDecreaseMultiplier = 1.5f;
 
 	[SerializeField] public float health { private set; get; }
 	[SerializeField] public int stars { private set; get; }
@@ -52,7 +53,7 @@ public class GameManager : MonoBehaviour
 
 	public void HealthDecreaseFloat( float quant )
 	{
-		health -= quant;
+		health -= quant * healthDecreaseMultiplier;
 
 		if( health <= 0 )
 		{

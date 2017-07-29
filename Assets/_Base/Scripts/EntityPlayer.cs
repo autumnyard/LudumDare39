@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class EntityPlayer : EntityBase
 {
@@ -31,6 +35,88 @@ public class EntityPlayer : EntityBase
 			Director.Instance.CheckEndGameCondition();
 		}
 
+	}
+
+
+	public float dashTime = 0.5f;
+	public float dashAgainTime = 0.5f;
+	public float dashAgainScale = 1.3f;
+	public float timeAnimationDashAgain = 0.1f;
+	[SerializeField, Range( 0.1f, 10f )] private float dashSpeed = 6f;
+	Coroutine dashTimerCoroutine;
+
+	public void Dash()
+	{
+		// Espera a que pueda hacer dash
+		if( canDash == false )
+		{
+			return;
+		}
+
+		canDash = false;
+		ChangeState( States.Dashing );
+		dashTimerCoroutine = StartCoroutine( DashTimer() );
+
+		// TRAIL
+		////trail.time = 0.5f;
+
+		/*
+        // GHOST
+        Debug.Log(" + Start dash");
+        GetComponent<GhostSprites>().enabled = true;
+        */
+		////if( sfxDash != null )
+		////{
+		////	sfxDash.Play();
+		////}
+
+		Vector2 direction = Vector2.zero;
+
+		if( Input.GetKey( KeyCode.W ) )
+		{
+			direction.y = 1;
+		}
+		else if( Input.GetKey( KeyCode.S ) )
+		{
+			direction.y = -1;
+		}
+
+		if( Input.GetKey( KeyCode.A ) )
+		{
+			direction.x = -1;
+		}
+		else if( Input.GetKey( KeyCode.D ) )
+		{
+			direction.x = 1;
+		}
+
+		// If we are not pressing anything, dash on the current direction
+		if( direction == Vector2.zero )
+		{
+			rigidbody.AddForce( rigidbody.velocity.normalized * dashSpeed, ForceMode2D.Impulse );
+		}
+		else // If we are pressing on a certain direction, dash over there
+		{
+			rigidbody.velocity = Vector2.zero;
+			rigidbody.AddForce( direction.normalized * dashSpeed, ForceMode2D.Impulse );
+		}
+	}
+
+
+	IEnumerator DashTimer()
+	{
+		yield return new WaitForSeconds( dashTime );
+		if( currentState == States.Dashing )
+		{
+			ChangeState( States.Normal );
+			//trail.time = 0.1f;
+		}
+
+		yield return new WaitForSeconds( dashAgainTime );
+		canDash = true;
+		//transform.GetChild( 0 ).DOScale( new Vector3( transform.localScale.x * dashAgainScale, transform.localScale.y * dashAgainScale, transform.localScale.z ), timeAnimationDashAgain )
+		//			  .SetEase( Ease.InOutCubic )
+		//		  .SetLoops( 2, LoopType.Yoyo );
 	}
 
 }
