@@ -73,8 +73,8 @@ public class Director : MonoBehaviour
 			//Debug.Log( healthDecreaseCounter );
 			if( healthDecreaseCounter < 0 )
 			{
-				var newHealth = gameManager.HealthDecrease();
-				managerUI.SetHealth( newHealth );
+				gameManager.HealthDecrease();
+				managerUI.SetHealth( gameManager.health );
 				healthDecreaseCounter = healthDecreaseTime;
 			}
 		}
@@ -371,10 +371,10 @@ public class Director : MonoBehaviour
 	public void DebugHealthIncrease( int howMuch )
 	{
 		// Modify the health
-		var newHealth = gameManager.HealthIncrease( howMuch );
+		gameManager.HealthIncrease( howMuch );
 
 		// Show the change in the UI
-		managerUI.SetHealth( newHealth );
+		managerUI.SetHealth( gameManager.health );
 
 		// Also reset healthDecreaser counter to 1 second
 		healthDecreaseCounter = healthDecreaseTime;
@@ -382,8 +382,18 @@ public class Director : MonoBehaviour
 
 	public void DebugStarTaken()
 	{
-		int newStarCounter = gameManager.StarsDecrease();
-		managerUI.SetStars( newStarCounter );
+		gameManager.StarsDecrease();
+		managerUI.SetStars( gameManager.stars );
+	}
+
+	public void CheckEndGameCondition()
+	{
+		if( gameManager.stars <= 0 )
+		{
+			// Finish the fucking level
+			//Debug.Log("FINISHE THE FUCKINGE LEVEL");
+			DebugLevelNext();
+		}
 	}
 	#endregion
 }

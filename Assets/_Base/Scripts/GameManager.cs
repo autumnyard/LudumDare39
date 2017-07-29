@@ -6,8 +6,8 @@ public class GameManager : MonoBehaviour
 {
 	#region Variables
 	[SerializeField] private int maxHealth = 20;
-	[SerializeField] private int health;
-	[SerializeField] private int stars;
+	[SerializeField] public int health { private set; get; }
+	[SerializeField] public int stars { private set; get; }
 
 	//public int health;
 
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
 		health = maxHealth;
 	}
 
-	public int HealthDecrease()
+	public void HealthDecrease()
 	{
 		health--;
 
@@ -47,19 +47,15 @@ public class GameManager : MonoBehaviour
 				OnPlayerDeath();
 			}
 		}
-
-		return health;
 	}
 
-	public int HealthIncrease( int howMuch )
+	public void HealthIncrease( int howMuch )
 	{
 		health += howMuch;
 		if( health > maxHealth )
 		{
 			health = maxHealth;
 		}
-
-		return health;
 	}
 
 	#endregion
@@ -71,18 +67,20 @@ public class GameManager : MonoBehaviour
 		stars = to;
 	}
 
-	public int StarsDecrease()
+	public void StarsDecrease()
 	{
 		stars--;
 		if( stars <= 0 )
 		{
-			if( OnNoStars != null )
-			{
-				OnNoStars();
-			}
+			stars = 0;
+			// No need for this, endgame will be triggered by EntityPlayer 
+			// when it enters an End trigger
+			//	if( OnNoStars != null )
+			//	{
+			//		OnNoStars();
+			//	}
 		}
-
-		return stars;
 	}
+
 	#endregion
 }

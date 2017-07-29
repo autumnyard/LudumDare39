@@ -50,7 +50,7 @@ public class ManagerUI : MonoBehaviour
 				panelMenu.Hide();
 				panelHUD.Show();
 				panelLoading.Hide();
-				panelDebug.Show();
+				//panelDebug.Show();
 				break;
 
 			case Structs.GameScene.LoadingGame:
