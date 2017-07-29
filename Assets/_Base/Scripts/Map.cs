@@ -6,6 +6,7 @@ public class Map : MonoBehaviour
 	public CameraHelper.Type cameraType = CameraHelper.Type.Unsetted;
 	public List<Vector2> players;
 	public List<Vector2> cameraGrabs;
+	public List<Vector2> stars;
 
 	private void Awake()
 	{
@@ -26,6 +27,10 @@ public class Map : MonoBehaviour
 
 				case MapThingie.Type.Player:
 					players.Add( item.transform.position );
+					break;
+
+				case MapThingie.Type.Star:
+					stars.Add( item.transform.position );
 					break;
 
 				default:

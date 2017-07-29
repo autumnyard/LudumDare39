@@ -33,4 +33,15 @@
         Exit,
         MaxValues
     }
+
+	// This should coincide with the tag
+	public enum Elements
+	{
+		Unsetted = 0,
+		Player,
+		Capsule,
+		Star,
+		End,
+		MaxValues
+	}
 }

@@ -5,5 +5,5 @@ using UnityEngine;
 public class Capsule : MonoBehaviour
 {
 
-	[SerializeField] private int healthRecover;
+	public int healthRecover = 5;
 }

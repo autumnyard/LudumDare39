@@ -9,6 +9,7 @@ public class MapThingie : MonoBehaviour
 		Unsetted,
 		Player,
 		CameraGrab,
+		Star,
 		MaxValues
 	}
 	public Type type = Type.Unsetted;

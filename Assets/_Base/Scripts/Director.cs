@@ -31,7 +31,7 @@ public class Director : MonoBehaviour
 
 	// Constant health decrease variables
 	private bool gameRunning = false;
-	public float healthDecreaseTimer = 1; // 1 second / health point
+	public float healthDecreaseTime = 1; // 1 second / health point
 	private float healthDecreaseCounter;
 	#endregion
 
@@ -75,7 +75,7 @@ public class Director : MonoBehaviour
 			{
 				var newHealth = gameManager.HealthDecrease();
 				managerUI.SetHealth( newHealth );
-				healthDecreaseCounter = healthDecreaseTimer;
+				healthDecreaseCounter = healthDecreaseTime;
 			}
 		}
 	}
@@ -87,7 +87,6 @@ public class Director : MonoBehaviour
 		{
 			CheckForNewCameraGrab();
 		}
-
 	}
 	#endregion
 
@@ -203,7 +202,7 @@ public class Director : MonoBehaviour
 		}
 		managerEntity.SummonPlayer( 0, playerInitPos );
 
-		// And finally, set camera
+		// Set camera
 		Vector2 cameraInitPos = Vector2.zero;
 
 		switch( newMap.cameraType )
@@ -238,6 +237,11 @@ public class Director : MonoBehaviour
 				managerCamera.cameras[0].SetFollow( managerEntity.playersScript[0].transform );
 				break;
 		}
+
+		// Set stars
+		int starNumber = newMap.stars.Count;
+		gameManager.SetStars( starNumber );
+		managerUI.SetStars( starNumber );
 	}
 
 	private void LoadNumberLevel( int levelNumber )
@@ -266,9 +270,10 @@ public class Director : MonoBehaviour
 	private void SetGameRunning( bool to )
 	{
 		gameRunning = to;
-		healthDecreaseCounter = healthDecreaseTimer;
+		healthDecreaseCounter = healthDecreaseTime;
 		gameManager.ResetHealth();
 	}
+
 	#endregion
 
 
@@ -363,5 +368,22 @@ public class Director : MonoBehaviour
 		managerCamera.cameras[0].OnNewCameraGrab( correctCameraGrab.x, correctCameraGrab.y );
 	}
 
+	public void DebugHealthIncrease( int howMuch )
+	{
+		// Modify the health
+		var newHealth = gameManager.HealthIncrease( howMuch );
+
+		// Show the change in the UI
+		managerUI.SetHealth( newHealth );
+
+		// Also reset healthDecreaser counter to 1 second
+		healthDecreaseCounter = healthDecreaseTime;
+	}
+
+	public void DebugStarTaken()
+	{
+		int newStarCounter = gameManager.StarsDecrease();
+		managerUI.SetStars( newStarCounter );
+	}
 	#endregion
 }
