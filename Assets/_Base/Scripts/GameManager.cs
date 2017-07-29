@@ -5,8 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 	#region Variables
-	[SerializeField] private int maxHealth = 20;
-	[SerializeField] public int health { private set; get; }
+	public const float maxHealth = 20;
+
+	[SerializeField] public float health { private set; get; }
 	[SerializeField] public int stars { private set; get; }
 
 	//public int health;
@@ -47,6 +48,20 @@ public class GameManager : MonoBehaviour
 				OnPlayerDeath();
 			}
 		}
+	}
+
+	public void HealthDecreaseFloat( float quant )
+	{
+		health -= quant;
+
+		if( health <= 0 )
+		{
+			if( OnPlayerDeath != null )
+			{
+				OnPlayerDeath();
+			}
+		}
+
 	}
 
 	public void HealthIncrease( int howMuch )

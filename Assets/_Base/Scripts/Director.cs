@@ -69,14 +69,19 @@ public class Director : MonoBehaviour
 		// Constant health decrease and death check
 		if( gameRunning )
 		{
-			healthDecreaseCounter -= Time.deltaTime;
-			//Debug.Log( healthDecreaseCounter );
-			if( healthDecreaseCounter < 0 )
-			{
-				gameManager.HealthDecrease();
-				managerUI.SetHealth( gameManager.health );
-				healthDecreaseCounter = healthDecreaseTime;
-			}
+			// This for float health, UI with slider
+			gameManager.HealthDecreaseFloat( Time.deltaTime );
+			managerUI.SetHealth( gameManager.health );
+
+			// This is when health is an int, UI with string
+			//healthDecreaseCounter -= Time.deltaTime;
+			////Debug.Log( healthDecreaseCounter );
+			//if( healthDecreaseCounter < 0 )
+			//{
+			//	gameManager.HealthDecrease();
+			//	managerUI.SetHealth( gameManager.health );
+			//	healthDecreaseCounter = healthDecreaseTime;
+			//}
 		}
 	}
 
@@ -374,7 +379,7 @@ public class Director : MonoBehaviour
 		gameManager.HealthIncrease( howMuch );
 
 		// Show the change in the UI
-		managerUI.SetHealth( gameManager.health );
+		managerUI.SetHealth( (int)gameManager.health );
 
 		// Also reset healthDecreaser counter to 1 second
 		healthDecreaseCounter = healthDecreaseTime;

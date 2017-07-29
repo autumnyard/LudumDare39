@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ManagerUI : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class ManagerUI : MonoBehaviour
 
 	// Panel HUD
 	[Header( "Ingame HUD" ), SerializeField] private UnityEngine.UI.Text health;
+	[SerializeField] public Slider healthSlider;
 	[SerializeField] private UnityEngine.UI.Text stars;
 	//[SerializeField] private UnityEngine.UI.Text score;
 	//[SerializeField] private UnityEngine.UI.Text enemycount;
@@ -25,6 +27,12 @@ public class ManagerUI : MonoBehaviour
 	void Awake()
 	{
 		Director.Instance.managerUI = this;
+	}
+
+	private void Start()
+	{
+		healthSlider.minValue = 0;
+		healthSlider.maxValue = GameManager.maxHealth;
 	}
 
 	//private void Update()
@@ -70,8 +78,8 @@ public class ManagerUI : MonoBehaviour
 	}
 	#endregion
 
-	#region Inagem HUD management
-	public void SetHealth( int newHealth )
+	#region Here lies the HUD management
+	public void SetHealth( float newHealth )
 	{
 		if( newHealth < 0 )
 		{
@@ -81,9 +89,12 @@ public class ManagerUI : MonoBehaviour
 		{
 			health.text = healthText + newHealth.ToString( "00" );
 		}
+
+		healthSlider.value = newHealth;
 	}
 
-	public void SetStars( int to)
+
+	public void SetStars( int to )
 	{
 		if( to < 0 )
 		{
