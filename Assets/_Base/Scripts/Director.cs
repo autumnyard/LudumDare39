@@ -28,6 +28,11 @@ public class Director : MonoBehaviour
 	public int currentLevel = 0;
 
 	public bool isPaused;
+
+	// Constant health decrease variables
+	private bool gameRunning = false;
+	public float healthDecreaseTimer = 1; // 1 second / health point
+	private float healthDecreaseCounter;
 	#endregion
 
 
@@ -59,12 +64,30 @@ public class Director : MonoBehaviour
 		DontDestroyOnLoad( this.gameObject );
 	}
 
+	private void Update()
+	{
+		// Constant health decrease and death check
+		if( gameRunning )
+		{
+			healthDecreaseCounter -= Time.deltaTime;
+			//Debug.Log( healthDecreaseCounter );
+			if( healthDecreaseCounter < 0 )
+			{
+				var newHealth = gameManager.HealthDecrease();
+				managerUI.SetHealth( newHealth );
+				healthDecreaseCounter = healthDecreaseTimer;
+			}
+		}
+	}
+
 	private void LateUpdate()
 	{
+		// Camera type: Snap to camera grabs
 		if( managerCamera.cameras[0].type == CameraHelper.Type.SnapToCameraGrabs )
 		{
 			CheckForNewCameraGrab();
 		}
+
 	}
 	#endregion
 
@@ -85,6 +108,7 @@ public class Director : MonoBehaviour
 			case Structs.GameScene.Menu:
 				managerInput.SetEvents();
 				managerUI.SetPanels();
+				SetGameRunning( false );
 				break;
 
 			case Structs.GameScene.LoadingGame:
@@ -96,6 +120,7 @@ public class Director : MonoBehaviour
 				//SetCameraOnPlayer();
 				//GameStart();
 				managerUI.SetPanels();
+				SetGameRunning( false );
 				SwitchToIngame();
 				break;
 
@@ -113,9 +138,14 @@ public class Director : MonoBehaviour
 
 				managerInput.SetEvents();
 				managerUI.SetPanels();
+
+				SetGameRunning( true );
+
 				break;
 
 			case Structs.GameScene.GameReset:
+				SetGameRunning( false );
+
 				managerEntity.playersScript[0].OnDie -= GameEnd;
 				managerEntity.Reset();
 				managerMap.Reset();
@@ -123,6 +153,7 @@ public class Director : MonoBehaviour
 				break;
 
 			case Structs.GameScene.GameEnd:
+
 				managerEntity.playersScript[0].OnDie -= GameEnd;
 				managerEntity.Reset();
 				managerMap.Reset();
@@ -230,6 +261,13 @@ public class Director : MonoBehaviour
 		{
 			currentLevel = 0;
 		}
+	}
+
+	private void SetGameRunning( bool to )
+	{
+		gameRunning = to;
+		healthDecreaseCounter = healthDecreaseTimer;
+		gameManager.ResetHealth();
 	}
 	#endregion
 
