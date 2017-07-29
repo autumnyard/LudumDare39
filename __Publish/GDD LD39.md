@@ -8,6 +8,7 @@
 ** Health **
 - Health can be up to a maximum, never surpassing it.
   - Currently 20, but may change on a level basis.
+  
 - Each movement you make, you lose health.
   - At first I made that you lose health with time.
   - Only when you move, you lose health.

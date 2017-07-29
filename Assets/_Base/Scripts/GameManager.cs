@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 	// Finish game condition
 	public delegate void Delegate();
 	public Delegate OnPlayerDeath;
-	public Delegate OnNoStars;
+	//public Delegate OnNoStars;
 	#endregion
 
 	#region Monobehaviour

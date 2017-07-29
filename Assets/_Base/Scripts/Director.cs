@@ -157,6 +157,7 @@ public class Director : MonoBehaviour
 				break;
 
 			case Structs.GameScene.GameEnd:
+				SetGameRunning( false );
 
 				managerEntity.playersScript[0].OnDie -= GameEnd;
 				managerEntity.Reset();
@@ -277,6 +278,19 @@ public class Director : MonoBehaviour
 		gameRunning = to;
 		healthDecreaseCounter = healthDecreaseTime;
 		gameManager.ResetHealth();
+
+		if( to )
+		{
+			gameManager.OnPlayerDeath += GameEnd;
+			//gameManager.OnNoStars += GameEnd;
+		}
+		else
+		{
+			if( gameManager.OnPlayerDeath != null )
+			{
+				gameManager.OnPlayerDeath -= GameEnd;
+			}
+		}
 	}
 
 	#endregion
