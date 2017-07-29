@@ -57,13 +57,15 @@ public class EntityBase : MonoBehaviour
     public Delegate OnExitMap;
     public Delegate OnCollideWithEntity;
 
-    public delegate void DelegateInt( int newHealth );
+	public delegate void DelegateInt( int newHealth );
     public DelegateInt OnHurt;
-    #endregion
 
 
-    #region Monobehaviour
-    private void Awake()
+	#endregion
+
+
+	#region Monobehaviour
+	private void Awake()
     {
         if (animator == null)
         {

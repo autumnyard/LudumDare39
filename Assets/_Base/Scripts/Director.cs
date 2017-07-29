@@ -33,6 +33,7 @@ public class Director : MonoBehaviour
 	public bool gameRunning { private set; get; }
 	public float healthDecreaseTime = 1; // 1 second / health point
 	private float healthDecreaseCounter;
+	private bool movingPlayer = false;
 	#endregion
 
 
@@ -67,7 +68,8 @@ public class Director : MonoBehaviour
 	private void Update()
 	{
 		// Constant health decrease and death check
-		if( gameRunning )
+		// Important: Health is only depleted by input
+		if( gameRunning && movingPlayer )
 		{
 			// This for float health, UI with slider
 			gameManager.HealthDecreaseFloat( Time.deltaTime );
@@ -399,6 +401,12 @@ public class Director : MonoBehaviour
 		healthDecreaseCounter = healthDecreaseTime;
 	}
 
+	public void DebugHealthDecrease( float howMuch = 0.1f )
+	{
+		gameManager.HealthDecreaseFloat( howMuch );
+		managerUI.SetHealth( gameManager.health );
+	}
+
 	public void DebugStarTaken()
 	{
 		gameManager.StarsDecrease();
@@ -413,6 +421,11 @@ public class Director : MonoBehaviour
 			//Debug.Log("FINISHE THE FUCKINGE LEVEL");
 			DebugLevelNext();
 		}
+	}
+
+	public void DebugPlayerMoving( bool setTo )
+	{
+		movingPlayer = setTo;
 	}
 	#endregion
 }
