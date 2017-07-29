@@ -30,7 +30,7 @@ public class Director : MonoBehaviour
 	public bool isPaused;
 
 	// Constant health decrease variables
-	private bool gameRunning = false;
+	public bool gameRunning { private set; get; }
 	public float healthDecreaseTime = 1; // 1 second / health point
 	private float healthDecreaseCounter;
 	#endregion

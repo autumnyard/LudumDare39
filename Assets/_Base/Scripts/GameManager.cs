@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 	#region Variables
-	public const float maxHealth = 20;
+	public const float maxHealth = 10f;
 
 	[SerializeField] public float health { private set; get; }
 	[SerializeField] public int stars { private set; get; }

@@ -3,25 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class TweenShake : MonoBehaviour {
+public class TweenShake : MonoBehaviour
+{
 
-    public bool playOnStart = true;
-    public float time = 1f;
-    public Vector3 strength = Vector3.zero;
-    public int vibrato = 100;
+	private Tweener thisTween;
+	public bool playOnStart = true;
+	public float time = 1f;
+	public Vector3 strength = Vector3.zero;
+	public int vibrato = 100;
+	public bool loop = false;
 
-    // Use this for initialization
-    void Start()
-    {
-        if (playOnStart)
-        {
-            Play();
-        }
-    }
+	// Use this for initialization
+	void Start()
+	{
+		if( playOnStart )
+		{
+			Play();
+		}
+	}
 
 
-    public void Play()
-    {
-        transform.DOShakePosition(time, strength, vibrato);
-    }
+	public void Play()
+	{
+        int loops = (loop) ? -1 : 0;
+		thisTween = transform.DOShakePosition( time, strength, vibrato )
+					  .SetLoops( loops );
+	}
+
+	public void Stop()
+	{
+		if( thisTween.IsPlaying() )
+		{
+			thisTween.Pause();
+		}
+	}
+
+	public void Update()
+	{
+
+		if( thisTween.IsPlaying() )
+		{
+			thisTween.Restart();
+			thisTween.Play();
+		}
+	}
 }
