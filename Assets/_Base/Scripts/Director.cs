@@ -26,9 +26,16 @@ public class Director : MonoBehaviour
 	public Structs.GameView currentGameView { private set; get; }
 	public Structs.GameScene currentScene;
 
+	// Level counter
 	private int maxLevelNumber = 3;
 	public int currentLevel = 0;
+	private bool finishedGame;
 
+	// Best time thingies
+	private float bestTime = -1;
+	private float currentTime = -1;
+
+	// Game cycle variables
 	public bool isPaused;
 
 	// Constant health decrease variables
@@ -71,21 +78,29 @@ public class Director : MonoBehaviour
 	{
 		// Constant health decrease and death check
 		// Important: Health is only depleted by input
-		if( gameRunning && movingPlayer )
+		if( gameRunning )
 		{
-			// This for float health, UI with slider
-			gameManager.HealthDecreaseFloat( Time.deltaTime );
-			managerUI.SetHealth( gameManager.health );
+			// Time counter for score
+			currentTime += Time.deltaTime;
+			managerUI.SetCurrentTime( (int)currentTime );
 
-			// This is when health is an int, UI with string
-			//healthDecreaseCounter -= Time.deltaTime;
-			////Debug.Log( healthDecreaseCounter );
-			//if( healthDecreaseCounter < 0 )
-			//{
-			//	gameManager.HealthDecrease();
-			//	managerUI.SetHealth( gameManager.health );
-			//	healthDecreaseCounter = healthDecreaseTime;
-			//}
+			if( movingPlayer )
+			{
+				// This for float health, UI with slider
+				gameManager.HealthDecreaseFloat( Time.deltaTime );
+				managerUI.SetHealth( gameManager.health );
+
+				// This is when health is an int, UI with string
+				//healthDecreaseCounter -= Time.deltaTime;
+				////Debug.Log( healthDecreaseCounter );
+				//if( healthDecreaseCounter < 0 )
+				//{
+				//	gameManager.HealthDecrease();
+				//	managerUI.SetHealth( gameManager.health );
+				//	healthDecreaseCounter = healthDecreaseTime;
+				//}
+			}
+
 		}
 	}
 
@@ -105,11 +120,12 @@ public class Director : MonoBehaviour
 	{
 		currentScene = to;
 
-		//Debug.Log("Change scene to: " + currentScene);
+		//Debug.Log( "Change scene to: " + currentScene );
 
 		switch( currentScene )
 		{
 			case Structs.GameScene.Initialization:
+				LoadScore();
 				SwitchToMenu();
 				break;
 
@@ -117,6 +133,10 @@ public class Director : MonoBehaviour
 				managerInput.SetEvents();
 				managerUI.SetPanels();
 				SetGameRunning( false );
+
+				// Everytime you lose or finish, go back to menu
+				// And therefore reset the victorious boolean
+				finishedGame = false;
 				break;
 
 			case Structs.GameScene.LoadingGame:
@@ -154,7 +174,12 @@ public class Director : MonoBehaviour
 			case Structs.GameScene.GameReset:
 				SetGameRunning( false );
 
-				managerEntity.playersScript[0].OnDie -= GameEnd;
+				//LoadNumberLevel( 0 ); // this is also used for next level
+
+				if( managerEntity.playersScript[0].OnDie != null )
+				{
+					managerEntity.playersScript[0].OnDie -= GameEnd;
+				}
 				managerEntity.Reset();
 				managerMap.Reset();
 				GameBegin();
@@ -162,6 +187,21 @@ public class Director : MonoBehaviour
 
 			case Structs.GameScene.GameEnd:
 				SetGameRunning( false );
+
+				// Check if player was victorious
+				if( finishedGame )
+				{
+					UpdateScore();
+					// And reset back to first level
+					LoadNumberLevel( 0 );
+				}
+				else
+				{
+					// If the player died without finishing the game
+					// Just don't reset the level, and go back
+					managerUI.SetScore( (int)bestTime, -1 );
+
+				}
 
 				managerEntity.playersScript[0].OnDie -= GameEnd;
 				managerEntity.Reset();
@@ -262,9 +302,19 @@ public class Director : MonoBehaviour
 	private void LoadNextLevel()
 	{
 		currentLevel++;
+
+		// Finished the game!
 		if( currentLevel >= maxLevelNumber )
 		{
-			currentLevel = 0; //maxLevelNumber - 1;
+			//currentLevel = 0; 
+			//currentLevel = maxLevelNumber - 1;
+			finishedGame = true;
+			GameEnd();
+		}
+		else
+		{
+			// Still not finished the game
+			GameReset();
 		}
 	}
 
@@ -282,14 +332,11 @@ public class Director : MonoBehaviour
 		gameRunning = to;
 		healthDecreaseCounter = healthDecreaseTime;
 		gameManager.ResetHealth();
-		// TODO: Camera effects turn off and on!!
-
 
 		if( to )
 		{
 			managerCamera.cameraEffects.Play();
 			gameManager.OnPlayerDeath += GameEnd;
-			//gameManager.OnNoStars += GameEnd;
 		}
 		else
 		{
@@ -300,6 +347,31 @@ public class Director : MonoBehaviour
 			}
 		}
 	}
+
+	private void UpdateScore()
+	{
+		// Check if new time is better than best, or is the first time finishing
+		if( currentTime < bestTime || bestTime == -1 )
+		{
+			bestTime = currentTime;
+		}
+
+		// Update time, only if it is better than last
+		managerUI.SetScore( (int)bestTime, (int)currentTime );
+
+		PlayerPrefs.SetInt( "BestTime", (int)bestTime );
+		PlayerPrefs.SetInt( "LastTime", (int)currentTime );
+
+		// Reset the score
+		currentTime = 0;
+	}
+
+	private void LoadScore()
+	{
+		bestTime = PlayerPrefs.GetInt( "BestTime", -1 );
+		currentTime = PlayerPrefs.GetInt( "LastTime", -1 );
+	}
+
 
 	#endregion
 
@@ -360,8 +432,7 @@ public class Director : MonoBehaviour
 
 	public void DebugLevelNext()
 	{
-		LoadNextLevel();
-		GameReset();
+		LoadNextLevel(); // GameReset or GameEnd inside this
 	}
 
 	public void DebugLevelPrevious()

@@ -258,6 +258,7 @@ public class ManagerInput : MonoBehaviour
 				Bind( ref OnKeyboard[(int)MyKeyboard.S], Director.Instance.managerEntity.playersScript[0].MoveDown );
 				Bind( ref OnKeyboard[(int)MyKeyboard.A], Director.Instance.managerEntity.playersScript[0].MoveLeft );
 				Bind( ref OnKeyboard[(int)MyKeyboard.D], Director.Instance.managerEntity.playersScript[0].MoveRight );
+				Bind( ref OnKeyboard[(int)MyKeyboard.Space], Director.Instance.managerEntity.playersScript[0].Dash );
 				Bind( ref OnKeyboard[(int)MyKeyboard.Key0], Director.Instance.managerEntity.playersScript[0].Dash );
 				Bind( ref OnKeyboard[(int)MyKeyboard.ControlLeft], Director.Instance.managerEntity.playersScript[0].Dash );
 				Bind( ref OnKeyboard[(int)MyKeyboard.ShiftLeft], Director.Instance.managerEntity.playersScript[0].Dash );
