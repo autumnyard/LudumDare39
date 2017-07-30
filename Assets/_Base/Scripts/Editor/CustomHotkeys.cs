@@ -15,7 +15,37 @@ public class CustomHotkeys : MonoBehaviour
 		}
 	}
 
-	[MenuItem("Pablo/Clear Console %t")]
+
+	[MenuItem( "Pablo/DEBUG Copy size from BoxCollider2D to Sliced SpriteRenderer %k" )]
+	static void DEBUGCopySizeFromColliderToSprite()
+	{
+		if( Selection.transforms != null )
+		{
+			var collider = Selection.transforms[0].GetComponent<BoxCollider2D>();
+			var renderer = Selection.transforms[0].GetComponent<SpriteRenderer>();
+			if( collider != null && renderer != null )
+			{
+				renderer.drawMode = SpriteDrawMode.Sliced;
+				renderer.size = collider.size;
+			}
+		}
+	}
+
+	[MenuItem( "Pablo/DEBUG Copy size from Sliced SpriteRenderer to BoxCollider2D %l" )]
+	static void DEBUGCopySizeFromSpriteToCollider()
+	{
+		if( Selection.transforms != null )
+		{
+			var collider = Selection.transforms[0].GetComponent<BoxCollider2D>();
+			var renderer = Selection.transforms[0].GetComponent<SpriteRenderer>();
+			if( collider != null && renderer != null && renderer.drawMode == SpriteDrawMode.Sliced )
+			{
+				collider.size = renderer.size;
+			}
+		}
+	}
+
+	[MenuItem( "Pablo/Clear Console %t" )]
 	static void ClearConsole()
 	{
 		// This simply does "LogEntries.Clear()" the long way:
@@ -24,7 +54,7 @@ public class CustomHotkeys : MonoBehaviour
 		clearMethod.Invoke( null, null );
 	}
 
-	[MenuItem("Pablo/Apply Prefab Changes %h")]
+	[MenuItem( "Pablo/Apply Prefab Changes %h" )]
 	static void ApplyPrefabChanges()
 	{
 		var obj = Selection.activeGameObject;

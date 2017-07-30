@@ -37,7 +37,7 @@ You can download it from: Not yet.
   - I guess I'll be going for A.
   - Multiplier is 1.5 * time delta
 
-#### Capsules **
+#### Capsules
 - There are capsules all over the map to recover health.
 
 

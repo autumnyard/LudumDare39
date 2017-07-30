@@ -264,7 +264,7 @@ public class Director : MonoBehaviour
 		currentLevel++;
 		if( currentLevel >= maxLevelNumber )
 		{
-			currentLevel = maxLevelNumber - 1;
+			currentLevel = 0; //maxLevelNumber - 1;
 		}
 	}
 
@@ -287,13 +287,13 @@ public class Director : MonoBehaviour
 
 		if( to )
 		{
-		managerCamera.cameraEffects.Play();
+			managerCamera.cameraEffects.Play();
 			gameManager.OnPlayerDeath += GameEnd;
 			//gameManager.OnNoStars += GameEnd;
 		}
 		else
 		{
-		managerCamera.cameraEffects.Reset();
+			managerCamera.cameraEffects.Reset();
 			if( gameManager.OnPlayerDeath != null )
 			{
 				gameManager.OnPlayerDeath -= GameEnd;
