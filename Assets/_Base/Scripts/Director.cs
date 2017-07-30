@@ -5,8 +5,8 @@ using System.Collections.Generic;
 
 public class Director : MonoBehaviour
 {
-
 	#region Variables
+
 	public GameManager gameManager;
 	public ManagerCamera managerCamera;
 	//public Player player;
@@ -19,15 +19,13 @@ public class Director : MonoBehaviour
 	public ManagerAudio managerAudio;
 
 
-
-
 	public Structs.GameMode currentGameMode { private set; get; }
 	public Structs.GameDifficulty currentGameDifficulty { private set; get; }
 	public Structs.GameView currentGameView { private set; get; }
 	public Structs.GameScene currentScene;
 
 	// Level counter
-	private int maxLevelNumber = 5;
+	private int maxLevelNumber = 6;
 	public int currentLevel = 0;
 	private bool finishedGame;
 
@@ -151,6 +149,7 @@ public class Director : MonoBehaviour
 				//GameStart();
 				managerAudio.StopSongMenu();
 				managerUI.SetPanels();
+				managerUI.SetWonText( false );
 				SetGameRunning( false );
 				SwitchToIngame();
 				break;
@@ -313,6 +312,7 @@ public class Director : MonoBehaviour
 			//currentLevel = 0; 
 			//currentLevel = maxLevelNumber - 1;
 			finishedGame = true;
+			managerUI.SetWonText( true );
 			GameEnd();
 		}
 		else

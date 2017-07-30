@@ -25,6 +25,7 @@ public class ManagerUI : MonoBehaviour
 	[SerializeField] private UnityEngine.UI.Text currentTime;
 	[SerializeField] private UnityEngine.UI.Text bestTime;
 	[SerializeField] private UnityEngine.UI.Text lastTime;
+	[SerializeField] private UnityEngine.UI.Text wonTime;
 
 	private const string healthText = "Health: ";
 	private const string starsText = "V H S > ";
@@ -161,6 +162,11 @@ public class ManagerUI : MonoBehaviour
 		{
 			currentTime.text = currentTimeText + to.ToString( /*"000"*/ ) + "";
 		}
+	}
+
+	public void SetWonText( bool to )
+	{
+		wonTime.enabled = to;
 	}
 	#endregion
 }
