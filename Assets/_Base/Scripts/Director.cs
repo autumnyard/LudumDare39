@@ -508,5 +508,10 @@ public class Director : MonoBehaviour
 	{
 		movingPlayer = setTo;
 	}
+
+	public void DebugResetState()
+	{
+		LoadScore();
+	}
 	#endregion
 }

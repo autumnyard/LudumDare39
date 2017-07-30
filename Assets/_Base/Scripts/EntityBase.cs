@@ -121,12 +121,12 @@ public class EntityBase : MonoBehaviour
 			//Debug.LogWarning("Collider wasn't setted in " + this.gameObject.name);
 		}
 
+		ChangeState( States.Init );
+
+		rigidbody.velocity = Vector3.zero;
+		rigidbody.angularVelocity = 0f;
 	}
 
-	private void Start()
-	{
-		ChangeState( States.Init );
-	}
 	#endregion
 
 

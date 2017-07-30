@@ -6,6 +6,11 @@ using DG.Tweening;
 
 public class EntityPlayer : EntityBase
 {
+	private void Start()
+	{
+		canDash = false;
+		dashTimerCoroutine = StartCoroutine( DashTimer() );
+	}
 
 	void OnTriggerEnter2D( Collider2D other )
 	{

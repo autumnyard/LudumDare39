@@ -33,7 +33,7 @@ public class ManagerCamera : MonoBehaviour
             cameras[i] = Camera.allCameras[i].GetComponent<CameraHelper>();
         }
 #if DEBUG
-        Debug.Log( "ManagerCamera: We have " + cameras.Length + " cameras, of which the main camera is: " + Camera.main.name );
+        //Debug.Log( "ManagerCamera: We have " + cameras.Length + " cameras, of which the main camera is: " + Camera.main.name );
 #endif
     }
 
