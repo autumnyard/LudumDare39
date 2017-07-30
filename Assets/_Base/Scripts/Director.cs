@@ -27,7 +27,7 @@ public class Director : MonoBehaviour
 	public Structs.GameScene currentScene;
 
 	// Level counter
-	private int maxLevelNumber = 3;
+	private int maxLevelNumber = 5;
 	public int currentLevel = 0;
 	private bool finishedGame;
 
