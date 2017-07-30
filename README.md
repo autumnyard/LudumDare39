@@ -16,11 +16,19 @@ Working in Unity 2017.1
 ## GDD
 
 ### Description ###
-- Top down game, free real time movement.
-- To finish a level you must take all the stars and then go to the end.
-- Health can be up to a maximum, never surpassing it.
+- Top down 2D game, free real time movement.
+- To finish a level you must take all the VHS and then go to the end.
+- You can move normally, or dash. 
+  - Dash has a delay
+  - Dash can break momentum.
+- Health has a maximum, never surpassing it.
 - Each movement you make, you lose health.
-- There are icecream all over the map to recover health.
+  - Dash doesn't consume health.
+- The icecream recovers your health.
+- There's a timer, which acts as a score.
+- There are X levels.
+  - If you die you continue in the one you died, with the timer still counting.
+  - If you finish the game, the level counter resets.
 
 ### Input
 - Move: Arrow keys or WASD.
