@@ -8,10 +8,10 @@ Theme: Running out of power
 Working in Unity 2017.1
 
 ## Links
-- LDJam link: https://ldjam.com/events/ludum-dare/39/$35081
-- Github: https://github.com/autumnyard/LudumDare39
-- Play in browser: https://dl.dropboxusercontent.com/u/12486477/LudumDare39/index.html
-- Download: Not yet.
+- ** LDJam link **: https://ldjam.com/events/ludum-dare/39/$35081
+- ** Github **: https://github.com/autumnyard/LudumDare39
+- ** Play in browser **: https://dl.dropboxusercontent.com/u/12486477/LudumDare39/index.html
+- ** Download **: https://drive.google.com/file/d/0B7cU0oadDLmFU2V5eTVuZExiWUE/view?usp=sharing
 
 ## GDD
 
@@ -22,6 +22,7 @@ Working in Unity 2017.1
   - Dash has a delay.
   - Dash can break momentum.
 - Health has a maximum, never surpassing it.
+- Six levels, of increasing complexity.
 - Each movement you make, you lose health.
   - Dash doesn't consume health.
 - The icecream recovers your health.
@@ -37,8 +38,8 @@ Working in Unity 2017.1
 
 
 ### Input
-- Move: Arrow keys or WASD.
-- Dash: CTRL, SHIFT, Number 0 or SPACE.
+- ** Move **: Arrow keys or WASD.
+- ** Dash **: CTRL, SHIFT, Number 0 or SPACE.
 
 ## About
 
@@ -57,4 +58,5 @@ Music samples from:
 - Ariel Pink - Lipstick
 - Ariel Pink - White Freckles
 - Shook - Almost There
+Copyright by their respective holders. Check them out, those respective albums are incredible!
 
