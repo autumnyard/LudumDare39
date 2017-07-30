@@ -27,7 +27,7 @@ public class ManagerUI : MonoBehaviour
 	[SerializeField] private UnityEngine.UI.Text lastTime;
 
 	private const string healthText = "Health: ";
-	private const string starsText = "S T A R S : ";
+	private const string starsText = "V H S > ";
 	private const string bestTimeText = "Best time: ";
 	private const string lastTimeText = "Last time: ";
 	private const string currentTimeText = "time:";

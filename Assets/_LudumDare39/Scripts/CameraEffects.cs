@@ -16,8 +16,8 @@ public class CameraEffects : MonoBehaviour
 	[SerializeField] private float healthShakeCutoff3 = 2f;
 
 	// Distance relative to health
-	private const float minDistance = -11f; // Remember these values are negative!
-	private const float maxDistance = -8f; // This is the closest
+	[SerializeField] private const float minDistance = -11f; // Remember these values are negative!
+	[SerializeField] private const float maxDistance = -7f; // This is the closest
 	private float distanceToHealthRatio;
 
 	private void Start()

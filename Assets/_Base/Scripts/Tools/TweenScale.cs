@@ -9,9 +9,10 @@ public class TweenScale : MonoBehaviour
     public float time = 1f;
     public Ease ease;
     public bool loop = false;
+	public LoopType loopType;
 
-    // Use this for initialization
-    void Start()
+	// Use this for initialization
+	void Start()
     {
         if (playOnStart)
         {
@@ -29,6 +30,7 @@ public class TweenScale : MonoBehaviour
         }
         transform.DOScale(new Vector3(scaleFinish, scaleFinish, transform.localScale.z), time)
                       .SetEase(ease)
-                      .SetLoops(loops);
-    }
+					  .SetLoops( loops, loopType );
+                      //.SetLoops(loops);
+	}
 }

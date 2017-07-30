@@ -16,6 +16,9 @@ public class EntityPlayer : EntityBase
 			//Debug.Log( other.tag + ": Recovering health " + recover );
 			Director.Instance.DebugHealthIncrease( recover );
 
+			// Play sound!
+			Director.Instance.managerAudio.PlaySfx1();
+
 			// And destroy the capsule
 			Destroy( other.gameObject );
 		}
@@ -24,6 +27,9 @@ public class EntityPlayer : EntityBase
 			// Remove the star from the remaining counter
 			//Debug.Log( other.tag + ": Taking a star!" );
 			Director.Instance.DebugStarTaken();
+
+			// Play sound!
+			Director.Instance.managerAudio.PlaySfx2();
 
 			// And destroy the star
 			Destroy( other.gameObject );

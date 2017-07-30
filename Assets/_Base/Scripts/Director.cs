@@ -134,6 +134,8 @@ public class Director : MonoBehaviour
 				managerUI.SetPanels();
 				SetGameRunning( false );
 
+				managerAudio.PlaySongMenu();
+
 				// Everytime you lose or finish, go back to menu
 				// And therefore reset the victorious boolean
 				finishedGame = false;
@@ -147,6 +149,7 @@ public class Director : MonoBehaviour
 				//InitCamera();
 				//SetCameraOnPlayer();
 				//GameStart();
+				managerAudio.StopSongMenu();
 				managerUI.SetPanels();
 				SetGameRunning( false );
 				SwitchToIngame();
@@ -180,6 +183,7 @@ public class Director : MonoBehaviour
 				{
 					managerEntity.playersScript[0].OnDie -= GameEnd;
 				}
+
 				managerEntity.Reset();
 				managerMap.Reset();
 				GameBegin();
@@ -333,18 +337,20 @@ public class Director : MonoBehaviour
 		healthDecreaseCounter = healthDecreaseTime;
 		gameManager.ResetHealth();
 
-		if( to )
+		if( to ) // Games is running
 		{
 			managerCamera.cameraEffects.Play();
 			gameManager.OnPlayerDeath += GameEnd;
+			managerAudio.PlaySongGame();
 		}
-		else
+		else // Game finished
 		{
 			managerCamera.cameraEffects.Reset();
 			if( gameManager.OnPlayerDeath != null )
 			{
 				gameManager.OnPlayerDeath -= GameEnd;
 			}
+			managerAudio.StopSongGame();
 		}
 	}
 
@@ -370,8 +376,9 @@ public class Director : MonoBehaviour
 	{
 		bestTime = PlayerPrefs.GetInt( "BestTime", -1 );
 		currentTime = PlayerPrefs.GetInt( "LastTime", -1 );
+		currentTime = 0;
+		currentLevel = 0;
 	}
-
 
 	#endregion
 
@@ -486,10 +493,13 @@ public class Director : MonoBehaviour
 
 	public void CheckEndGameCondition()
 	{
+		// Player had all stars when touching finish bin. Finish level!
 		if( gameManager.stars <= 0 )
 		{
+			// Play sound!
+			Director.Instance.managerAudio.PlaySfx3();
+
 			// Finish the fucking level
-			//Debug.Log("FINISHE THE FUCKINGE LEVEL");
 			DebugLevelNext();
 		}
 	}
