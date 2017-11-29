@@ -1,0 +1,10 @@
+{
+"TOTAL_MEMORY": 268435456,
+"dataUrl": "Aesthetics Raider.data.unityweb",
+"asmCodeUrl": "Aesthetics Raider.asm.code.unityweb",
+"asmMemoryUrl": "Aesthetics Raider.asm.memory.unityweb",
+"asmFrameworkUrl": "Aesthetics Raider.asm.framework.unityweb",
+"backgroundUrl": "Aesthetics Raider.jpg",
+"splashScreenStyle": "Dark",
+"backgroundColor": "#FFFFFF"
+}

@@ -8,7 +8,7 @@ Theme: Running out of power
 Working in Unity 2017.1
 
 ## Links
-- ** LDJam link **: https://ldjam.com/events/ludum-dare/39/$35081
+- ** LDJam link **: https://ldjam.com/events/ludum-dare/39/aesthetics-raider
 - ** Github **: https://github.com/autumnyard/LudumDare39
 - ** Play in browser **: https://dl.dropboxusercontent.com/u/12486477/LudumDare39/index.html
 - ** Download **: https://drive.google.com/file/d/0B7cU0oadDLmFU2V5eTVuZExiWUE/view?usp=sharing

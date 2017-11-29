@@ -203,7 +203,6 @@ public class Director : MonoBehaviour
 					// If the player died without finishing the game
 					// Just don't reset the level, and go back
 					managerUI.SetScore( (int)bestTime, -1 );
-
 				}
 
 				managerEntity.playersScript[0].OnDie -= GameEnd;
@@ -374,8 +373,16 @@ public class Director : MonoBehaviour
 
 	private void LoadScore()
 	{
-		bestTime = PlayerPrefs.GetInt( "BestTime", -1 );
-		currentTime = PlayerPrefs.GetInt( "LastTime", -1 );
+		if( PlayerPrefs.HasKey( "BestTime" ) )
+		{
+			bestTime = PlayerPrefs.GetInt( "BestTime" );
+		Debug.Log( "Best time 1: " + bestTime );
+		}
+		else
+		{
+			bestTime = -1;
+		Debug.Log( "Best time 2: " + bestTime );
+		}
 		currentTime = 0;
 		currentLevel = 0;
 	}
@@ -511,6 +518,10 @@ public class Director : MonoBehaviour
 
 	public void DebugResetState()
 	{
+		if( PlayerPrefs.HasKey( "BestTime" ) )
+		{
+			PlayerPrefs.DeleteKey( "BestTime");
+		}
 		LoadScore();
 	}
 	#endregion
