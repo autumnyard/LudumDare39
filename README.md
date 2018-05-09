@@ -1,5 +1,7 @@
 # Asthetics Raider
 
+[[logo.png|alt=logo]]
+
 ## Description
 My entry for the Ludum Dare 39 Compo: http://ldjam.com
 
@@ -10,7 +12,7 @@ Working in Unity 2017.1
 ## Links
 - ** LDJam link **: https://ldjam.com/events/ludum-dare/39/aesthetics-raider
 - ** Github **: https://github.com/autumnyard/LudumDare39
-- ** Play in browser **: https://dl.dropboxusercontent.com/u/12486477/LudumDare39/index.html
+- ** Play in browser **: https://autumnyard.itch.io/aestheticsraider
 - ** Download **: https://drive.google.com/file/d/0B7cU0oadDLmFU2V5eTVuZExiWUE/view?usp=sharing
 
 ## GDD
