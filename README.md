@@ -1,6 +1,6 @@
 # Asthetics Raider
 
-[[logo.png|alt=logo]]
+![logo](logo.png?raw=true "Title")
 
 ## Description
 My entry for the Ludum Dare 39 Compo: http://ldjam.com
